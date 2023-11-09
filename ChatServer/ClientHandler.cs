@@ -37,20 +37,29 @@ namespace ChatServer
                             _login(client_reader);
                             logged_in = true;
                         }
-                        else{
+                        else
+                        {
                             this.client.send_message("please log in or sign up to send messages \n");
                         }
                     }
-
-                    else {
-                        foreach (Client cl in cs.get_clients()) {
-                            if(cl!= client)
-                            cl.send_message(this.name + ": " + msg + "\n");
+                    else if (msg[0] == '/') {
+                        _handle_command(msg);
+                    }
+                    else
+                    {
+                        foreach (Client cl in cs.get_clients())
+                        {
+                            if (cl != client)
+                                cl.send_message(this.name + ": " + msg + "\n");
                         }
                     }
                     Console.WriteLine("Message recieved " + msg +"\n");
                 }
             }
+        }
+
+        public void _handle_command(String msg){
+
         }
 
         public void _sign_up(StreamReader client_reader, Client client)
@@ -132,6 +141,8 @@ namespace ChatServer
                         {
                             ChatServer.dh.select(user, pass);
                             this.name = user;
+                            Console.WriteLine("Login successfull");
+                            return;
                         }
                         catch (Exception e) { this.client.send_message("An error occured on login, please try again"); }
                     }
