@@ -1,16 +1,12 @@
-﻿using System;
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Collections.Generic;
+﻿using System.Net.Sockets;
 
 namespace ChatServer
 {
 	public class ClientHandler
 	{
 		Client client;
+        ChatServer cs;
+        string name;
 		public ClientHandler(Client client)
 		{
             this.client = client;
@@ -36,9 +32,23 @@ namespace ChatServer
                             logged_in = true;
                         }
 
-                        if (msg.ToUpper().Equals("LOG IN")) { _login(client_reader); }
+                        else if (msg.ToUpper().Equals("LOG IN"))
+                        {
+                            _login(client_reader);
+                            logged_in = true;
+                        }
+                        else{
+                            this.client.send_message("please log in or sign up to send messages \n");
+                        }
                     }
-                    Console.WriteLine("Message recieved " + msg);
+
+                    else {
+                        foreach (Client cl in cs.get_clients()) {
+                            if(cl!= client)
+                            cl.send_message(this.name + ": " + msg + "\n");
+                        }
+                    }
+                    Console.WriteLine("Message recieved " + msg +"\n");
                 }
             }
         }
@@ -82,6 +92,7 @@ namespace ChatServer
                         }
                         if (!user.Equals(""))
                         {
+                            this.name = user;
                             Console.WriteLine("User and password set successfully \n");
                             return;
                         }
@@ -120,11 +131,17 @@ namespace ChatServer
                         try
                         {
                             ChatServer.dh.select(user, pass);
+                            this.name = user;
                         }
                         catch (Exception e) { this.client.send_message("An error occured on login, please try again"); }
                     }
                 }
             }
+        }
+
+
+        public void set_chat_server(ChatServer cs) {
+            this.cs = cs;
         }
 
 
