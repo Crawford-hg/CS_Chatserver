@@ -7,6 +7,7 @@ namespace ChatServer
 		Client client;
         ChatServer cs;
         string name;
+        bool running = true;
 		public ClientHandler(Client client)
 		{
             this.client = client;
@@ -16,7 +17,7 @@ namespace ChatServer
         {
             bool logged_in = false;
 
-            while (true)
+            while (running == true)
             {
                 NetworkStream client_stream = client.get_Stream();
                 StreamReader client_reader = new StreamReader(client_stream);
@@ -30,12 +31,14 @@ namespace ChatServer
                         {
                             _sign_up(client_reader, this.client);
                             logged_in = true;
+                            client.set_name(name);
                         }
 
                         else if (msg.ToUpper().Equals("LOG IN"))
                         {
                             _login(client_reader);
                             logged_in = true;
+                            client.set_name(name);
                         }
                         else
                         {
@@ -47,19 +50,57 @@ namespace ChatServer
                     }
                     else
                     {
-                        foreach (Client cl in cs.get_clients())
+                foreach (Client cl in cs.get_clients())
                         {
                             if (cl != client)
                                 cl.send_message(this.name + ": " + msg + "\n");
                         }
                     }
                     Console.WriteLine("Message recieved " + msg +"\n");
+                    if (running == false)
+                    {
+                        client.send_message("\n ---------------------------------- \n disconnecting from server \n ----------------------------------");
+                        return;
+                    }
                 }
+                if (running == false)
+                {
+                    client.send_message("\n ---------------------------------- \n disconnecting from server \n ----------------------------------");
+                    return;
+                }
+
             }
         }
 
-        public void _handle_command(String msg){
+        public void quit() {
+            cs.remove_client(client);
+            this.running = false;
+            //this.cs = null;
+            //this.client = null;
+        }
 
+        public void _handle_command(String msg){
+            switch (msg) {
+                case "/quit":
+                    quit();
+                    break;
+            }
+
+            if (msg.Contains("/direct")){
+                string[] tokens = msg.Split(' ');
+                string target = tokens[1];
+                Client recipient = null;
+                foreach (Client cl in cs.get_clients()) {
+                    if (cl.get_name().Equals(target)) {
+                        recipient = cl;
+                        break;
+                    }
+                }
+                string outMsg = string.Join(" ", tokens, 1, tokens.Length -1);
+                if(recipient != null)
+                    recipient.send_message("DIRECT " + name + ": "+outMsg + "\n");
+
+            }
         }
 
         public void _sign_up(StreamReader client_reader, Client client)
