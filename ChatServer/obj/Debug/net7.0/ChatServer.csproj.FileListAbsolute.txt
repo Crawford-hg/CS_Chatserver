@@ -1,0 +1,15 @@
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.csproj.AssemblyReference.cache
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.GeneratedMSBuildEditorConfig.editorconfig
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.AssemblyInfoInputs.cache
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.AssemblyInfo.cs
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.csproj.CoreCompileInputs.cache
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/bin/Debug/net7.0/ChatServer
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/bin/Debug/net7.0/ChatServer.deps.json
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/bin/Debug/net7.0/ChatServer.runtimeconfig.json
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/bin/Debug/net7.0/ChatServer.dll
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/bin/Debug/net7.0/ChatServer.pdb
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.dll
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/refint/ChatServer.dll
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.pdb
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ChatServer.genruntimeconfig.cache
+/Users/crawfordhardie-grainger/Projects/ChatServer/ChatServer/obj/Debug/net7.0/ref/ChatServer.dll
