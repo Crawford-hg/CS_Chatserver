@@ -12,10 +12,12 @@ namespace ChatServer
 
 		int PORT = 1998;
 		//String HOST = "localhost";
-		HashSet<Client> clients = new HashSet<Client>();
+		public  HashSet<Client> clients = new HashSet<Client>();
+        public static dataHandler dh = new dataHandler();
 
 		public ChatServer()
 		{
+
 
             TcpListener listener = new TcpListener(IPAddress.Any, PORT);
 			listener.Start();
@@ -27,15 +29,19 @@ namespace ChatServer
 				clients.Add(cl);
 				cl.send_message("Welcome to the server");
 
+				ClientHandler ch = new ClientHandler(cl);
+
+				Thread thread = new Thread(()=>ch.handle_client());
+				thread.Start();
+
 			}
 		}
-
-
 
         public static void Main(string[] Args)
         {
             Console.WriteLine("Starting up Server");
             ChatServer cs = new ChatServer();
+			
         }
     }
 

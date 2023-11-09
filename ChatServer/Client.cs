@@ -10,6 +10,7 @@ namespace ChatServer
 	{
 		TcpClient client;
 		StreamWriter sw;
+		String name;
 		public Client(TcpClient client)
 		{
 			this.client = client;
@@ -23,6 +24,16 @@ namespace ChatServer
 			sw.Write(msg);
 			sw.Flush();
 		}
+
+
+		public NetworkStream get_Stream() {
+			return client.GetStream();
+		}
+
+		public void set_name(string name) {
+			this.name = name;
+		}
 	}
+
 }
 
