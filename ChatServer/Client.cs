@@ -8,6 +8,7 @@ namespace ChatServer
 	{
 		TcpClient client;
 		StreamWriter sw;
+		String name;
 		public Client(TcpClient client)
 		{
 			this.client = client;
@@ -25,6 +26,14 @@ namespace ChatServer
 
 		public NetworkStream get_Stream() {
 			return client.GetStream();
+		}
+
+		public void set_name(string n) {
+			this.name = n;
+		}
+
+		public string get_name() {
+			return name;
 		}
 
 	}

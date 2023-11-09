@@ -43,6 +43,10 @@ namespace ChatServer
 			return clients;
 		}
 
+		public void remove_client(Client client) {
+			clients.Remove(client);
+		}
+
 		
 
         public static void Main(string[] Args)
